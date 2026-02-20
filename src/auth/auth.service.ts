@@ -25,6 +25,7 @@ export class AuthService {
     const existing = await this.prisma.user.findUnique({
       where: { email: dto.email },
     });
+
     if (existing) {
       throw new ConflictException('Email already in use');
     }
@@ -33,7 +34,6 @@ export class AuthService {
     const user = await this.prisma.user.create({
       data: { name: dto.name, email: dto.email, password: hashed },
     });
-
     const { password, ...result } = user;
 
     return result;
@@ -43,6 +43,7 @@ export class AuthService {
     const user = await this.prisma.user.findUnique({
       where: { email: dto.email },
     });
+
     if (!user) {
       throw new UnauthorizedException('Invalid credentials');
     }
@@ -53,6 +54,7 @@ export class AuthService {
     }
 
     const payload = { sub: user.id, email: user.email };
+
     return {
       access_token: await this.jwtService.signAsync(payload),
     };
