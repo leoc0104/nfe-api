@@ -21,7 +21,7 @@ REST API for NF-e (Nota Fiscal Eletrônica) management, built with **NestJS**, *
 
 | Module | Description |
 |---|---|
-| **Authentication** | Register and login with email/password — passwords hashed with bcrypt |
+| **Authentication** | Register (name, email, password + confirmation) and login — passwords hashed with bcrypt |
 | **JWT Guard** | Protects all `/nfe` routes — returns `401` for missing or invalid tokens |
 | **XML Upload** | Accepts NF-e `.xml` files (SEFAZ layout), parses them and persists to the database |
 | **NF-e List** | Paginated listing of all imported NF-e documents (without items) |
@@ -115,8 +115,10 @@ All endpoints are prefixed with `/api/v1`.
 **Register — request body:**
 ```json
 {
+  "name": "John Doe",
   "email": "user@example.com",
-  "password": "password123"
+  "password": "password123",
+  "confirmPassword": "password123"
 }
 ```
 
@@ -124,6 +126,7 @@ All endpoints are prefixed with `/api/v1`.
 ```json
 {
   "id": "uuid",
+  "name": "John Doe",
   "email": "user@example.com",
   "created_at": "2026-01-01T00:00:00.000Z"
 }
@@ -146,7 +149,7 @@ All routes require the header: `Authorization: Bearer <token>`
 |---|---|---|---|
 | `GET` | `/api/v1/nfe` | `200` | Paginated list of NF-e documents (no items) |
 | `GET` | `/api/v1/nfe/:id` | `200` / `404` | Full NF-e detail including line items |
-| `POST` | `/api/v1/nfe/uploads` | `201` / `400` / `409` | Upload and parse an NF-e XML file |
+| `POST` | `/api/v1/nfe/uploads` | `201` / `400` / `409` | Upload and parse an NF-e XML file — returns the created NFe object with items |
 
 **GET `/api/v1/nfe` — query params:**
 
@@ -200,6 +203,7 @@ export interface NFeItem {
   code: string;            // det > prod > cProd
   description: string;     // det > prod > xProd
   ncm: string;             // det > prod > NCM
+  cfop: string;            // det > prod > CFOP
   quantity: number;        // det > prod > qCom
   unit_price: number;      // det > prod > vUnCom
   total_value: number;     // det > prod > vProd
@@ -212,6 +216,7 @@ export interface User {
   email: string;
   created_at: Date;
   // password is never returned by any endpoint
+  // confirmPassword is only used on registration — never persisted
 }
 ```
 
