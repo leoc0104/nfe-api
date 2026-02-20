@@ -228,7 +228,7 @@ export interface User {
 
 ```bash
 # 1. Clone the repository
-git clone <repo-url>
+git clone git@github.com:leoc0104/nfe-api.git
 cd nfe-api
 
 # 2. Create the environment file
