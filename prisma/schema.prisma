@@ -19,16 +19,18 @@ model User {
 }
 
 model NFe {
-  id           String      @id @default(uuid())
-  access_key   String      @unique
-  number       String
-  series       String
-  issue_date   DateTime
-  issuer_name  String
-  issuer_cnpj  String
-  total_value  Float
-  items        NFeItem[]
-  created_at   DateTime    @default(now())
+  id               String    @id @default(uuid())
+  access_key       String    @unique
+  number           String
+  series           String
+  issue_date       DateTime
+  issuer_name      String
+  issuer_cnpj      String
+  recipient_name   String
+  recipient_cnpj   String
+  total_value      Float
+  items            NFeItem[]
+  created_at       DateTime  @default(now())
 }
 
 model NFeItem {

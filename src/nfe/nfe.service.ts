@@ -64,6 +64,7 @@ export class NFeService {
 
     const ide = infNFe.ide;
     const emit = infNFe.emit;
+    const dest = infNFe.dest;
     const total = infNFe.total;
     const det: any[] = Array.isArray(infNFe.det)
       ? infNFe.det
@@ -82,6 +83,8 @@ export class NFeService {
         issue_date: new Date(ide.dhEmi ?? ide.dEmi),
         issuer_name: emit.xNome,
         issuer_cnpj: String(emit.CNPJ),
+        recipient_name: dest?.xNome ?? '',
+        recipient_cnpj: String(dest?.CNPJ ?? dest?.CPF ?? ''),
         total_value: Number(total.ICMSTot.vNF),
         items: {
           createMany: {

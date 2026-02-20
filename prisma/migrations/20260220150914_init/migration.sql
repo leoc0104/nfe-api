@@ -16,6 +16,8 @@ CREATE TABLE "NFe" (
     "issue_date" DATETIME NOT NULL,
     "issuer_name" TEXT NOT NULL,
     "issuer_cnpj" TEXT NOT NULL,
+    "recipient_name" TEXT NOT NULL,
+    "recipient_cnpj" TEXT NOT NULL,
     "total_value" REAL NOT NULL,
     "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
