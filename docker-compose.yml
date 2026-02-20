@@ -6,4 +6,10 @@ services:
     container_name: nfe-api
     ports:
       - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    env_file:
+      - .env
+    command: sh -c "npx prisma generate && npm run start:dev"
     restart: unless-stopped
