@@ -38,6 +38,7 @@ model NFeItem {
   code        String
   description String
   ncm         String
+  cfop        String
   quantity    Float
   unit_price  Float
   total_value Float

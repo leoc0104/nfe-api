@@ -28,6 +28,7 @@ CREATE TABLE "NFeItem" (
     "code" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "ncm" TEXT NOT NULL,
+    "cfop" TEXT NOT NULL,
     "quantity" REAL NOT NULL,
     "unit_price" REAL NOT NULL,
     "total_value" REAL NOT NULL,

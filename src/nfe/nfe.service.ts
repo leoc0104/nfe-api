@@ -92,6 +92,7 @@ export class NFeService {
               code: String(d.prod.cProd),
               description: d.prod.xProd,
               ncm: String(d.prod.NCM),
+              cfop: String(d.prod.CFOP),
               quantity: Number(d.prod.qCom),
               unit_price: Number(d.prod.vUnCom),
               total_value: Number(d.prod.vProd),
